@@ -1,19 +1,27 @@
 function rootReducer(state, action) {
-  switch(action.type){
+  switch (action.type) {
     case 'addCart':
-      return 'hi';
+      console.log("state_add", state.product)
+      console.log("action", action)
+      const initialCartCopy = { ...state.cart, [action.cartItem.name]: action.cartItem };
+      console.log("bat", initialCartCopy)
+      return {
+        ...state,
+        cart: initialCartCopy
+      }
+
     case 'removeCart':
-      return 'hello'
+      console.log("state_remove", state);
+      const currCartCopy = { ...state.cart };
+      delete currCartCopy[action.cartItem.name]
+      console.log("cat", currCartCopy)
+      return {
+        ...state,
+        cart: currCartCopy
+      }
     default:
       throw new Error(`Unexpected action type: ${action.type}`)
   }
 }
-
-//addCart -> 
-/**
- * return { 
- *  ...state, item obj?
- * }
- */
 
 export default rootReducer;

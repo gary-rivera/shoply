@@ -6,16 +6,20 @@ import rootReducer from './rootReducer';
 import DispatchContext from "./dispatchContext";
 import ShoppingCartContext from './shoppingCartContext';
 
+const INITIAL_STATE = {
+  product: itemData.products,
+  cart: {}
+};
+
 function App() {
   console.log("app rendered")
-  const { products } = itemData
-  const [state, dispatch] = useReducer(rootReducer, {products})
+  const [state, dispatch] = useReducer(rootReducer, INITIAL_STATE)
 
   return (
     <div className="App">
       <DispatchContext.Provider value={dispatch}>
         <ShoppingCartContext.Provider value={state.items}>
-          <ItemList value={dispatch}items={products}/>
+          <ItemList value={dispatch}items={state.product}/>
         </ShoppingCartContext.Provider>
       </DispatchContext.Provider>
     </div>
